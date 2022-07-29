@@ -8,6 +8,7 @@
     <title> Document </title>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/ca9e11192c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -15,7 +16,17 @@
     <button onclick="setGridResolution()" Ï> Change Board Resolution </button>
     <h3 id="resolution"> Current resolution: 16x16 </h3>
     <div class="container"></div>
-    <footer> Copyright &copy; Michael Orsow 2022 </footer>
+    <footer>
+        <p>
+            Copyright ©
+            <script>
+                document.write(new Date().getFullYear())
+            </script>
+            Michael Orsow
+        </p>
+        <a href="https://github.com/mikeorsow" target="_blank">
+            <i class="fab fa-github"></i></a>
+    </footer>
 </body>
 
 </html>
