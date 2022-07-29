@@ -1,28 +1,55 @@
 const container = document.querySelector("div.container");
+const resolution = document.querySelector("#resolution");
 
-const buildGrid = (gridSize) => {
-  const squareSize = Math.round(960 / gridSize);
-  for (let i = 0; i < gridSize * gridSize; i++) {
+// Default resolution to display in Change Resolution Prompt
+let currentResolution = 16;
+
+const buildGrid = (numGridRows) => {
+  // Grid width is fixed at 960px, so this fits the squares into the grid nicely
+  const squareSize = 960 / numGridRows;
+
+  resolution.textContent = `Resolution set to ${numGridRows} x ${numGridRows}`;
+
+  for (let i = 0; i < numGridRows * numGridRows; i++) {
     const square = document.createElement("div");
+
     square.classList.add("square");
     square.style.width = `${squareSize}px`;
     square.style.height = `${squareSize}px`;
+
     square.addEventListener("mouseover", (e) => {
-      console.log("MOUSEY MOUSEY");
-      e.target.classList.add("filled");
+      // Increment opacity by 0.1 on each mouseover
+      e.target.style.opacity = Number(e.target.style.opacity) + 0.2;
     });
 
     container.appendChild(square);
   }
 };
 
-const setGridSize = () => {
-  console.log("you did it");
-  const promptGridSize = parseInt(prompt("How mamy squares per side? Max 100", 16)) 
-  if (promptGridSize > 100) return alert(`Sorry, that's tooooo big!`)
+const setGridResolution = () => {
+  // Capture new resolution size
+  const promptInput = prompt(
+    "Please enter a new resolution between 1-100.",
+    currentResolution
+  );
+
+  // Handle invalid resolution inputs
+  if (promptInput == null) {
+    return;
+  } else if (promptInput > 100 || promptInput < 1 || isNaN(promptInput)) {
+    return alert(`Please enter a number between 1-100.`);
+  }
+
+  // Set the new grid resolution
+  const newGridResolution = parseInt(promptInput);
+  currentResolution = newGridResolution;
+
+  // Clear the old grid
   container.innerHTML = "";
-  buildGrid(promptGridSize);
+
+  // Build out the new grid
+  buildGrid(newGridResolution);
 };
 
-// default grid size 16x16
+// Build default grid size 16x16 on load
 buildGrid(16);
