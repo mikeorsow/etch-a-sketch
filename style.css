@@ -20,7 +20,7 @@ body {
     padding: 0;
     margin: 0;
     width: 960px;
-    height: auto; 
+    height: 960px; 
     display: flex;
     flex-flow: row wrap;
     border: solid black 2px;
@@ -32,8 +32,6 @@ body {
     flex: auto;
     padding: 0;
     margin: 0;
-    height: 50px;
-    width: 50px;
 }
 
 .filled {
